@@ -22,8 +22,8 @@ defmodule MyApp.Auth.User do
     |> put_password_hash()
   end
 
-  def put_password_hash(
-        %Ecto.Chageset{valid?: true, chages: %{password: password}} = changeset
+  defp put_password_hash(
+        %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
       ) do
     change(changeset, Bycript.add_hash(password))
   end
