@@ -4,13 +4,14 @@ defmodule MyApp.Auth.User do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
+  @timestamps_opts [type: :naive_datetime, usec: false]
   schema "users" do
     field :email, :string
     field :is_active, :boolean, default: false
     field :password, :string, virtual: true
     field :password_hash, :string
 
-    timestamps(type: :utc_datetime_usec)
+    timestamps()
   end
 
   @doc false
@@ -25,7 +26,7 @@ defmodule MyApp.Auth.User do
   defp put_password_hash(
         %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
       ) do
-    change(changeset, Bycript.add_hash(password))
+    change(changeset, Bcrypt.add_hash(password))
   end
 
   defp put_password_hash(changeset) do

@@ -8,7 +8,7 @@ use Mix.Config
 config :my_app, MyApp.Repo,
   username: "postgres",
   password: "postgres",
-  database: "my_app_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "my_app_phoenix_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
